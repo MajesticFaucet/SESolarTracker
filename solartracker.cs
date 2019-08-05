@@ -25,7 +25,8 @@ public Program()
     }
 }
 
-private void Setup() {
+private void Setup()
+{
     var rotorgroup = GridTerminalSystem.GetBlockGroupWithName(_rotorgroupname);
     if(rotorgroup == null) throw new Exception("Rotor group " + _rotorgroupname + " does not exist.");
     rotors = new List<IMyMotorStator>();
@@ -45,7 +46,8 @@ private void Setup() {
     Runtime.UpdateFrequency = defaultfreq;
 }
 
-private IMyPowerProducer GetPanel(string panelname) {
+private IMyPowerProducer GetPanel(string panelname)
+{
     if(string.IsNullOrEmpty(panelname)) throw new Exception("Panel name must not be empty or null.");
     var block = GridTerminalSystem.GetBlockWithName(panelname);
     if(block == null) throw new Exception("Panel " + panelname + " does not exist.");
@@ -68,7 +70,8 @@ public void Main(string argument, UpdateType updateSource)
     }
 }
 
-public void Run() {
+public void Run()
+{
     float y = panely.MaxOutput;
     if(y == 0F) {
         EnsureRotorParams(false, _upperlimit);
@@ -84,7 +87,8 @@ public void Run() {
     Echo("Sun angle: " + sunangle.ToString());
 }
 
-private void EnsureRotorParams(bool vel, float up) {
+private void EnsureRotorParams(bool vel, float up)
+{
     float fvel = vel ? _velocitylimit : _velocitylimit * -1F;
     if(rotors[0].TargetVelocityRPM != fvel) {
         foreach(var rotor in rotors) {
@@ -100,10 +104,12 @@ private void EnsureRotorParams(bool vel, float up) {
     }
 }
 
-private float RadiansToDegrees(float val) {
+private float RadiansToDegrees(float val)
+{
     return val*(180F/(float)Math.PI);
 }
 
-private float DegreesToRadians(float val) {
+private float DegreesToRadians(float val)
+{
     return val/(180F/(float)Math.PI);
 }

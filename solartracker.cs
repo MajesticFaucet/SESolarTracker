@@ -83,7 +83,11 @@ public void Run()
 
     float sunangle = RadiansToDegrees((float)Math.Atan((plusx-negx)/y));
     float tmppx = _upposition+sunangle;
-    EnsureRotorParams(true, tmppx<=_upperlimit ? tmppx : _upperlimit);
+    if(tmppx < _lowerlimit) {
+        EnsureRotorParams(false, _upperlimit);
+    } else {
+        EnsureRotorParams(true, tmppx<=_upperlimit ? tmppx : _upperlimit);
+    }
     Echo("Sun angle: " + sunangle.ToString());
 }
 
